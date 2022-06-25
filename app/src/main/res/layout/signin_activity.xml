@@ -40,6 +40,7 @@
             android:id="@+id/editTextEmailIn"
             style="@style/WDEditText"
             android:hint="E-mail"
+            android:text="test@mail.ru"
             android:inputType="textEmailAddress" />
 
         <EditText
@@ -47,6 +48,7 @@
             style="@style/WDEditText"
             android:layout_marginTop="16dp"
             android:hint="Пароль"
+            android:text="test"
             android:inputType="textPassword"/>
 
     </LinearLayout>

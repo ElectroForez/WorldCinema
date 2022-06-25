@@ -6,7 +6,7 @@
     android:background="@color/backgroundColor">
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/coverImage"
         android:layout_width="0dp"
         android:layout_height="400dp"
         android:scaleType="centerCrop"
@@ -15,16 +15,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_weight="1"/>
+
     <ImageView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_cool_effect"
         android:scaleType="centerCrop"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="@id/coverImage"
+        app:layout_constraintStart_toStartOf="@id/coverImage"
+        app:layout_constraintTop_toTopOf="@id/coverImage" />
 
     <Button
+        android:id="@+id/watchCoverButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/mainColor"
@@ -34,10 +36,10 @@
         android:paddingBottom="13dp"
         android:text="Смотреть"
         android:textAllCaps="false"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView3"
-        app:layout_constraintEnd_toEndOf="@+id/imageView3"
-        app:layout_constraintStart_toStartOf="@id/imageView3"
-        app:layout_constraintTop_toTopOf="@+id/imageView3"
+        app:layout_constraintBottom_toBottomOf="@+id/coverImage"
+        app:layout_constraintEnd_toEndOf="@+id/coverImage"
+        app:layout_constraintStart_toStartOf="@id/coverImage"
+        app:layout_constraintTop_toTopOf="@+id/coverImage"
         app:layout_constraintVertical_bias="0.9" />
 
     <ScrollView
@@ -46,7 +48,7 @@
         android:layout_height="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imageView3"
+        app:layout_constraintTop_toBottomOf="@id/coverImage"
         app:layout_constraintBottom_toTopOf="@id/tabBar">
 
         <LinearLayout
@@ -59,20 +61,24 @@
             <TextView
                 android:text="В тренде"
                 style="@style/main_header" />
+
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/inTrendRecycler"
                 android:layout_width="match_parent"
-                android:layout_height="144dp"/>
+                android:layout_height="144dp" />
 
             <TextView
                 android:text="Новое"
                 style="@style/main_header" />
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/newRecycler"
                 android:layout_width="match_parent"
                 android:layout_height="144dp"/>
             <TextView
                 android:text="Для вас"
                 style="@style/main_header" />
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/forYouRecycler"
                 android:layout_width="match_parent"
                 android:layout_height="144dp"/>
         </LinearLayout>
@@ -88,6 +94,8 @@
         <TableRow>
             <ImageView
                 android:src="@drawable/ic_tabmain"
+                android:backgroundTintMode="src_in"
+                android:backgroundTint="@color/white"
                 android:layout_weight="1"/>
             <ImageView
                 android:src="@drawable/ic_tabpodborka"

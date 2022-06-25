@@ -14,6 +14,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.yadren.worldcinema.common.API;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -50,13 +51,37 @@ public class SignInActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        String url = "http://cinema.areas.su/auth/login";
+        String url = API.hostnameURL + "/auth/login";
 
         RequestQueue requestQueue = Volley.newRequestQueue(SignInActivity.this);
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, json,
-                response -> startActivity(new Intent(SignInActivity.this, MainScreenActivity.class)),
-                error -> Toast.makeText(this, "Неверные данные авторизации", Toast.LENGTH_LONG).show());
+                response -> {
+                    try {
+                        requestOnResponse(response);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                },
+                error -> requestOnError(error)
+        );
         requestQueue.add(request);
+    }
+
+    private void requestOnResponse(JSONObject response) throws JSONException {
+        Intent intent = new Intent(this, MainScreenActivity.class);
+        API.token = response.getString("token");
+        startActivity(intent);
+        finishActivity(0);
+    }
+
+    private void requestOnError(VolleyError error) {
+        if (error.networkResponse == null) {
+            Toast.makeText(this, "Проверьте интернет соединение", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (error.networkResponse.statusCode == 401) {
+            Toast.makeText(this, "Неверные данные для авторизации", Toast.LENGTH_SHORT).show();
+        }
     }
 }
