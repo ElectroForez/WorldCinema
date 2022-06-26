@@ -72,7 +72,8 @@ public class SignInActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MainScreenActivity.class);
         API.token = response.getString("token");
         startActivity(intent);
-        finishActivity(0);
+        finish();
+//        finishActivity();
     }
 
     private void requestOnError(VolleyError error) {
