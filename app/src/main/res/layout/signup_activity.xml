@@ -7,7 +7,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/backgroundColor"
     android:paddingStart="16dp"
-    android:paddingEnd="16dp">
+    android:paddingEnd="16dp"
+    tools:context=".SignUpActivity">
 
     <ImageView
         android:id="@+id/imageView"
@@ -49,24 +50,29 @@
                 android:orientation="vertical">
 
                 <EditText
+                    android:id="@+id/nameUp"
                     style="@style/WDEditText"
                     android:hint="Имя" />
 
                 <EditText
+                    android:id="@+id/surnameUp"
                     style="@style/WDEditText"
                     android:hint="Фамилия" />
 
                 <EditText
+                    android:id="@+id/emailUp"
                     style="@style/WDEditText"
                     android:hint="E-mail"
                     android:inputType="textEmailAddress" />
 
                 <EditText
+                    android:id="@+id/passwordUp"
                     style="@style/WDEditText"
                     android:hint="Пароль"
                     android:inputType="textPassword" />
 
                 <EditText
+                    android:id="@+id/repeatPasswordUp"
                     style="@style/WDEditText"
                     android:hint="Повторите пароль"
                     android:inputType="textPassword" />
@@ -86,7 +92,8 @@
                     android:backgroundTint="@color/mainColor"
                     android:padding="13dp"
                     android:text="Зарегистрироваться"
-                    android:textAllCaps="false" />
+                    android:textAllCaps="false"
+                    android:onClick="signUpClick"/>
 
                 <Button
                     android:layout_width="match_parent"

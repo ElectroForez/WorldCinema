@@ -20,6 +20,8 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.regex.Pattern;
+
 public class SignUpActivity extends AppCompatActivity {
 
     @Override
@@ -29,19 +31,39 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
 
-    public void signInClick(View view){
-        String login = ((TextView)findViewById(R.id.editTextEmailIn)).getText().toString();
-        String password = ((TextView)findViewById(R.id.editTextPasswordIn)).getText().toString();
-        if (login.equals("") || password.equals("")) {
-            Toast.makeText(this, "Введите логин и пароль", Toast.LENGTH_LONG).show();
+    public void signUpClick(View view){
+        String firstName = ((TextView) findViewById(R.id.nameUp)).getText().toString();
+        String lastName = ((TextView) findViewById(R.id.surnameUp)).getText().toString();
+        String email = ((TextView) findViewById(R.id.emailUp)).getText().toString();
+        String password = ((TextView) findViewById(R.id.passwordUp)).getText().toString();
+        String repeatPassword = ((TextView) findViewById(R.id.repeatPasswordUp)).getText().toString();
+
+        String[] fields = {firstName, lastName, email, password, repeatPassword};
+
+        for (String fieldText: fields) {
+            if (fieldText.equals("")) {
+                Toast.makeText(this, "Не все поля заполнены", Toast.LENGTH_LONG).show();
+                return;
+            }
+        }
+
+        if (password.equals(repeatPassword)) {
+            Toast.makeText(this, "Пароли не совпадают", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        if (Pattern.matches("[a-zA-Z0-9]@[a-zA-Z0-9][.][a-z]{1,3}", password)) {
+            Toast.makeText(this, "Неверный формат почты", Toast.LENGTH_LONG).show();
             return;
         }
 
 
         JSONObject json = new JSONObject();
         try {
-            json.put("email", login);
+            json.put("email", email);
             json.put("password", password);
+            json.put("firstName", firstName);
+            json.put("lastName", lastName);
         } catch (JSONException e) {
             e.printStackTrace();
         }
