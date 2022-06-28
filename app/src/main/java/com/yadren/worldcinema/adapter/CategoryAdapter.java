@@ -42,7 +42,6 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Collec
         this.itemLayoutId = itemLayoutId;
         this.imageLayoutId = imageLayoutId;
         requestQueue = Volley.newRequestQueue(context);
-        System.out.println("Start adapter: " + itemLayoutId + " " + imageLayoutId);
     }
 
     @NonNull
@@ -79,9 +78,6 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Collec
 
             String url = API.hostnameURL + "/up/images/" + poster;
 
-            System.out.println("Downloading " + url);
-            System.out.println("item " + itemLayoutId);
-            System.out.println("image " + imageLayoutId);
             ImageRequest imageRequest = new ImageRequest(url, new Response.Listener<Bitmap>() {
                 @Override
                 public void onResponse(Bitmap response) {

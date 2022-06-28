@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,12 +20,23 @@ import com.yadren.worldcinema.common.API;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Scanner;
+
 public class SignInActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.signin_activity);
+
+        String dataFilePath = getCacheDir().toString() + "/data.txt";
+        File dataFile = new File(dataFilePath);
+
 
     }
 
@@ -58,8 +70,19 @@ public class SignInActivity extends AppCompatActivity {
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, json,
                 response -> {
                     try {
+                        String dataFilePath = getCacheDir().toString() + "/data.txt";
+                        File dataFile = new File(dataFilePath);
+
+                        FileWriter fileWriter = new FileWriter(dataFile);
+                        fileWriter.write(login + "\n");
+                        fileWriter.write(password + "\n");
+                        fileWriter.close();
+                        Log.println(Log.DEBUG, "FILE", "File was written");
+
                         requestOnResponse(response);
                     } catch (JSONException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
                         e.printStackTrace();
                     }
                 },
