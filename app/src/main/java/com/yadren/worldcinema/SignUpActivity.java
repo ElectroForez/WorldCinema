@@ -68,7 +68,7 @@ public class SignUpActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        String url = API.hostnameURL + "/auth/login";
+        String url = API.hostnameURL + "/auth/register";
 
         RequestQueue requestQueue = Volley.newRequestQueue(this);
 
